@@ -1,0 +1,3 @@
+http://localhost:8080/za14ixhygx/front/login.html
+
+http://localhost:8080/za14ixhygx/adminLogin/login.html

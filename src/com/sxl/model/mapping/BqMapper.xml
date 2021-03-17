@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.BqDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Bq">
+		<id column="bqName" property="bqName"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_bq(bqName) values(#{bqName})
+	</insert>
+	
+	<update id="update">
+	 update t_bq
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="bqName!=null">bqName=#{bqName},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Bq">
+		select * from t_bq where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_bq where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Bq">
+		select * from t_bq where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Bq">
+		select count(1) from t_bq where 1=1 
+	</select>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.AddressDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Address">
+		<id column="customerId" property="customerId"/>
+		<id column="province" property="province"/>
+		<id column="city" property="city"/>
+		<id column="area" property="area"/>
+		<id column="phone" property="phone"/>
+		<id column="lxr" property="lxr"/>
+		<id column="xxdz" property="xxdz"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_address(customerId,province,city,area,phone,lxr,xxdz) values(#{customerId},#{province},#{city},#{area},#{phone},#{lxr},#{xxdz})
+	</insert>
+	
+	<update id="update">
+	 update t_address
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	  <if test="province!=null">province=#{province},</if>
+	  <if test="city!=null">city=#{city},</if>
+	  <if test="area!=null">area=#{area},</if>
+	  <if test="phone!=null">phone=#{phone},</if>
+	  <if test="lxr!=null">lxr=#{lxr},</if>
+	  <if test="xxdz!=null">xxdz=#{xxdz},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Address">
+		select * from t_address where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_address where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Address">
+		select * from t_address where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Address">
+		select count(1) from t_address where 1=1 
+	</select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.PinglunDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Pinglun">
+		<id column="wdxxId" property="wdxxId"/>
+		<id column="customerId" property="customerId"/>
+		<id column="content" property="content"/>
+		<id column="insertDate" property="insertDate"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_pinglun(wdxxId,customerId,content,insertDate) values(#{wdxxId},#{customerId},#{content},#{insertDate})
+	</insert>
+	
+	<update id="update">
+	 update t_pinglun
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="wdxxId!=null">wdxxId=#{wdxxId},</if>
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	  <if test="content!=null">content=#{content},</if>
+	  <if test="insertDate!=null">insertDate=#{insertDate},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Pinglun">
+		select * from t_pinglun where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_pinglun where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Pinglun">
+		select * from t_pinglun where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Pinglun">
+		select count(1) from t_pinglun where 1=1 
+	</select>
+</mapper>

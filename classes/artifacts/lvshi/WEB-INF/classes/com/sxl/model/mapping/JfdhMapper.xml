@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.JfdhDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Jfdh">
+		<id column="jfName" property="jfName"/>
+		<id column="jfCost" property="jfCost"/>
+		<id column="jfPic" property="jfPic"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_jfdh(jfName,jfCost,jfPic) values(#{jfName},#{jfCost},#{jfPic})
+	</insert>
+	
+	<update id="update">
+	 update t_jfdh
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="jfName!=null">jfName=#{jfName},</if>
+	  <if test="jfCost!=null">jfCost=#{jfCost},</if>
+	  <if test="jfPic!=null">jfPic=#{jfPic},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Jfdh">
+		select * from t_jfdh where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_jfdh where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Jfdh">
+		select * from t_jfdh where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Jfdh">
+		select count(1) from t_jfdh where 1=1 
+	</select>
+</mapper>

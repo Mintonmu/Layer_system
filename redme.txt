@@ -1,0 +1,23 @@
+运行环境
+
+	jdk7+tomcat7+mysql+IntelliJ IDEA+maven
+
+项目技术(必填)
+
+	spring+spring mvc+mybatis+bootstrap+jquery+jstl
+	
+项目发布路径
+	/za14ixhygx
+	
+前台首页
+
+	http://localhost:8080/za14ixhygx/front/index.html
+	
+	
+后台
+	http://localhost:8080/za14ixhygx/adminLogin/login.html
+
+用户名：
+	管理员：admin/123456
+	律师： znzbs/123456
+	普通用户: testznz/123456

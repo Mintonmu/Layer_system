@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.UserDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.User">
+		<id column="username" property="username"/>
+		<id column="password" property="password"/>
+		<id column="name" property="name"/>
+		<id column="gh" property="gh"/>
+		<id column="mobile" property="mobile"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_user(username,password,name,gh,mobile) values(#{username},#{password},#{name},#{gh},#{mobile})
+	</insert>
+	
+	<update id="update">
+	 update t_user
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="username!=null">username=#{username},</if>
+	  <if test="password!=null">password=#{password},</if>
+	  <if test="name!=null">name=#{name},</if>
+	  <if test="gh!=null">gh=#{gh},</if>
+	  <if test="mobile!=null">mobile=#{mobile},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.User">
+		select * from t_user where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_user where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.User">
+		select * from t_user where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.User">
+		select count(1) from t_user where 1=1 
+	</select>
+</mapper>

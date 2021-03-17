@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.OrderlistDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Orderlist">
+		<id column="customerId" property="customerId"/>
+		<id column="orderId" property="orderId"/>
+		<id column="productId" property="productId"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_orderlist(customerId,orderId,productId) values(#{customerId},#{orderId},#{productId})
+	</insert>
+	
+	<update id="update">
+	 update t_orderlist
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	  <if test="orderId!=null">orderId=#{orderId},</if>
+	  <if test="productId!=null">productId=#{productId},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Orderlist">
+		select * from t_orderlist where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_orderlist where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Orderlist">
+		select * from t_orderlist where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Orderlist">
+		select count(1) from t_orderlist where 1=1 
+	</select>
+</mapper>

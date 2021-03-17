@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.MessageDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Message">
+		<id column="customerId" property="customerId"/>
+		<id column="messageContent" property="messageContent"/>
+		<id column="types" property="types"/>
+		<id column="insertDate" property="insertDate"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_message(customerId,messageContent,types,insertDate) values(#{customerId},#{messageContent},#{types},#{insertDate})
+	</insert>
+	
+	<update id="update">
+	 update t_message
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	  <if test="messageContent!=null">messageContent=#{messageContent},</if>
+	  <if test="types!=null">types=#{types},</if>
+	  <if test="insertDate!=null">insertDate=#{insertDate},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Message">
+		select * from t_message where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_message where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Message">
+		select * from t_message where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Message">
+		select count(1) from t_message where 1=1 
+	</select>
+</mapper>

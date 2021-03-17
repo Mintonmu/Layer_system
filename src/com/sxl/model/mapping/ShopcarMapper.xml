@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.ShopcarDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Shopcar">
+		<id column="productId" property="productId"/>
+		<id column="num" property="num"/>
+		<id column="customerId" property="customerId"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_shopcar(productId,num,customerId) values(#{productId},#{num},#{customerId})
+	</insert>
+	
+	<update id="update">
+	 update t_shopcar
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="productId!=null">productId=#{productId},</if>
+	  <if test="num!=null">num=#{num},</if>
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Shopcar">
+		select * from t_shopcar where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_shopcar where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Shopcar">
+		select * from t_shopcar where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Shopcar">
+		select count(1) from t_shopcar where 1=1 
+	</select>
+</mapper>

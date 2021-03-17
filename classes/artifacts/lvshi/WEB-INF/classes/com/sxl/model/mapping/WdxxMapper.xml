@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.WdxxDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Wdxx">
+		<id column="customerId" property="customerId"/>
+		<id column="title" property="title"/>
+		<id column="pic" property="pic"/>
+		<id column="content" property="content"/>
+		<id column="zan" property="zan"/>
+		<id column="insertDate" property="insertDate"/>
+		<id column="nologin" property="nologin"/>
+		<id column="bkId" property="bkId"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_wdxx(customerId,title,pic,content,zan,insertDate,nologin,bkId) values(#{customerId},#{title},#{pic},#{content},#{zan},#{insertDate},#{nologin},#{bkId})
+	</insert>
+	
+	<update id="update">
+	 update t_wdxx
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="customerId!=null">customerId=#{customerId},</if>
+	  <if test="title!=null">title=#{title},</if>
+	  <if test="pic!=null">pic=#{pic},</if>
+	  <if test="content!=null">content=#{content},</if>
+	  <if test="zan!=null">zan=#{zan},</if>
+	  <if test="insertDate!=null">insertDate=#{insertDate},</if>
+	  <if test="nologin!=null">nologin=#{nologin},</if>
+	  <if test="bkId!=null">bkId=#{bkId},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Wdxx">
+		select * from t_wdxx where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_wdxx where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Wdxx">
+		select * from t_wdxx where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Wdxx">
+		select count(1) from t_wdxx where 1=1 
+	</select>
+</mapper>
